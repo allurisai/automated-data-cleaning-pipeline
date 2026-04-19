@@ -1,0 +1,9 @@
+streamlit
+pandas
+seaborn
+matplotlib
+pyspark
+ydata-profiling
+streamlit-pandas-profiling
+scikit-learn
+imbalanced-learn
