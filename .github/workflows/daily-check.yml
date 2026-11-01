@@ -1,0 +1,35 @@
+
+name: Daily Project Health Check
+
+on:
+  schedule:
+    - cron: "23 15 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  health-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Check Python syntax
+        run: python -m compileall -q .
+
+      - name: Run tests if available
+        run: |
+          if [ -d tests ]; then
+            python -m pip install pytest
+            python -m pytest tests
+          else
+            echo "No tests directory yet."
+          fi
